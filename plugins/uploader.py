@@ -23,14 +23,6 @@ async def uploaderHandler(bot:Update, msg:Message):
             parse_mode = 'html'
         )
         loginDetail = getting_email_pass(msg.chat.id)
-        if loginDetail:
-            await pmsg.edit_text(
-                "<code>Login details Found, Now verifying it...</code>",
-                parse_mode = 'html'
-            )
-            email, password = loginDetail
-            mlog = loginInstance(email, password, bot)
-
             if isinstance(mlog, int):
                 await pmsg.edit_text(
                     f"Seems like your <b>Login Detail has changed.</b> /revoke this account, and add new login detail.{common_text}",
@@ -174,10 +166,5 @@ async def uploaderHandler(bot:Update, msg:Message):
                     )
                 finally:
                     shutil.rmtree(downLoc)
-        else:
-            await pmsg.edit_text(
-                f"<i>Your account is not logged in😒, so I am unable to upload file.</i>{common_text}",
-                parse_mode = 'html'
-            )
     return
 
